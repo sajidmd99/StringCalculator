@@ -17,7 +17,11 @@ public class IncubyteStringCalculator {
 
     public static int[] getArrayOfNumbers(String numbers) {
         String[] arrOfStr;
-        if(numbers.startsWith("//[")) {         // string with multiple size delimiter
+        if(numbers.startsWith("//[") && numbers.charAt(4) == ']') {
+            arrOfStr = splitByMultipleDelimiter(numbers);
+        }
+
+        else if(numbers.startsWith("//[")) {         // string with multiple size delimiter
             arrOfStr = splitByAnyLengthDelimiter(numbers);
         }
         else if(numbers.startsWith("//")) {     // string with custom delimiter
@@ -62,6 +66,12 @@ public class IncubyteStringCalculator {
         for(int i=0; i<stringList.size(); i++) arr[i] = stringList.get(i);
 
         return arr;
+    }
+
+    public static String[] splitByMultipleDelimiter(String numbers) {
+        String[] strArr = numbers.split("\n");
+
+        return strArr[1].split("[!@#$%^&*_+-]");
     }
 
     public static int sumOfArray(int[] arr) throws Exception {
