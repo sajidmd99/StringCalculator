@@ -3,6 +3,7 @@ package com.sajid;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class IncubyteStringCalculatorTest {
     @Test
@@ -33,5 +34,17 @@ public class IncubyteStringCalculatorTest {
     @Test
     public void add_NUmbersWithDifferentDelimiters_success() throws Exception {
         assertEquals(3, IncubyteStringCalculator.add("//;\n1;2"));
+    }
+
+    @Test
+    public void add_NegativeNumbers_success() throws Exception {
+        Exception exception = assertThrows(
+                Exception.class,
+                () -> {
+                    IncubyteStringCalculator.add("5,-1");
+                }
+        );
+
+        assertEquals("negatives not allowed: -1", exception.getMessage());
     }
 }
