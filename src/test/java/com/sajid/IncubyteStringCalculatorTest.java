@@ -59,4 +59,8 @@ public class IncubyteStringCalculatorTest {
         assertEquals(6, IncubyteStringCalculator.add("//[,,,]\n1,,,2,,,3"));
     }
 
+    @Test
+    public void add_NumbersWithMultipleDelimiters_success() throws Exception {
+        assertEquals(6, IncubyteStringCalculator.add("//[*][%]\n1*2%3"));
+    }
 }
