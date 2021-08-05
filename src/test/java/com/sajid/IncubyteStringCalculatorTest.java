@@ -29,4 +29,9 @@ public class IncubyteStringCalculatorTest {
     public void add_NumbersWithLines_success() throws Exception {
         assertEquals(9, IncubyteStringCalculator.add("1\n5,3"));
     }
+
+    @Test
+    public void add_NUmbersWithDifferentDelimiters_success() throws Exception {
+        assertEquals(3, IncubyteStringCalculator.add("//;\n1;2"));
+    }
 }
