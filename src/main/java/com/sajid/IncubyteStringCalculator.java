@@ -48,6 +48,7 @@ public class IncubyteStringCalculator {
 
         int sum = 0;
         for(int num: arr) {
+            if(num > 1000) continue;
             sum += num;
         }
 
