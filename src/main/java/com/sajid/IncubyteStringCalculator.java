@@ -5,8 +5,8 @@ public class IncubyteStringCalculator {
         //for empty string
         if(numbers.isEmpty())
             return 0;
-        // for multiple numbers
-        String[] arrOfNumbers = numbers.split(",");
+        // for multiple numbers with commas and new lines
+        String[] arrOfNumbers = numbers.split(",|\n");
         int sum = 0;
         for(String num: arrOfNumbers) {
             sum += Integer.parseInt(num);

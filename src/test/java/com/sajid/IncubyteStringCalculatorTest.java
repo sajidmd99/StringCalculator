@@ -24,4 +24,9 @@ public class IncubyteStringCalculatorTest {
     public void add_multipleNumbers_success() throws Exception {
         assertEquals(10, IncubyteStringCalculator.add("2,3,5"));
     }
+
+    @Test
+    public void add_NumbersWithLines_success() throws Exception {
+        assertEquals(9, IncubyteStringCalculator.add("1\n5,3"));
+    }
 }
