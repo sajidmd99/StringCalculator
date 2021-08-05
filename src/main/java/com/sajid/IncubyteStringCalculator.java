@@ -2,18 +2,16 @@ package com.sajid;
 
 public class IncubyteStringCalculator {
     public static int add(String numbers) {
-        // for empty string
-        if(numbers.length() == 0)
+        //for empty string
+        if(numbers.isEmpty())
             return 0;
+        // for multiple numbers
+        String[] arrOfNumbers = numbers.split(",");
+        int sum = 0;
+        for(String num: arrOfNumbers) {
+            sum += Integer.parseInt(num);
+        }
 
-            //for one number
-        else if(numbers.length() == 1)
-            return Integer.parseInt(numbers);
-
-        //for two numbers
-
-        int n1 = Integer.parseInt(numbers.charAt(0)+"");
-        int n2 = Integer.parseInt(numbers.charAt(2)+"");
-        return n1 + n2;
+        return sum;
     }
 }
