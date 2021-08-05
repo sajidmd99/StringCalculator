@@ -17,8 +17,11 @@ public class IncubyteStringCalculator {
 
     public static int[] getArrayOfNumbers(String numbers) {
         String[] arrOfStr;
-        if(numbers.startsWith("//")) {
-            arrOfStr = splitByCustomDelimeter(numbers);
+        if(numbers.startsWith("//[")) {         // string with multiple size delimiter
+            arrOfStr = splitByAnyLengthDelimiter(numbers);
+        }
+        else if(numbers.startsWith("//")) {     // string with custom delimiter
+            arrOfStr = splitByCustomDelimiter(numbers);
         }
         else {
             arrOfStr = splitByLinesAndCommas(numbers);
@@ -36,11 +39,29 @@ public class IncubyteStringCalculator {
         return numbers.split(",|\n");
     }
 
-    public static String[] splitByCustomDelimeter(String numbers) {
+    public static String[] splitByCustomDelimiter(String numbers) {
         String delimeter = "" + numbers.charAt(2);
         String[] numArray = numbers.split("\n");
 
         return numArray[1].split(delimeter);
+    }
+
+    // splitting by delimiter of any length
+    public static String[] splitByAnyLengthDelimiter(String numbers) {
+        String delimeter = "" + numbers.charAt(3);
+        String[] stArr = numbers.split("\n");
+        List<String> stringList = new ArrayList<>();
+        for(int i=1; i<stArr.length; i++) {
+            String[] temp = stArr[i].split(delimeter);
+            for(String st: temp) {
+                if(!st.isEmpty()) stringList.add(st);
+            }
+        }
+
+        String[] arr = new String[stringList.size()];
+        for(int i=0; i<stringList.size(); i++) arr[i] = stringList.get(i);
+
+        return arr;
     }
 
     public static int sumOfArray(int[] arr) throws Exception {

@@ -52,4 +52,11 @@ public class IncubyteStringCalculatorTest {
     public void ignoringNumbersGreaterThan1000_success() throws Exception {
         assertEquals(8, IncubyteStringCalculator.add("4,1002,4"));
     }
+
+
+    @Test
+    public void add_NumbersWithDifferentSizeDelimiter_success() throws Exception {
+        assertEquals(6, IncubyteStringCalculator.add("//[,,,]\n1,,,2,,,3"));
+    }
+
 }
