@@ -15,28 +15,39 @@ public class IncubyteStringCalculator {
         return sum;
     }
 
+
+
     public static int[] getArrayOfNumbers(String numbers) {
-        String[] arrOfStr;
-        if(numbers.startsWith("//[") && numbers.charAt(4) == ']') {
-            arrOfStr = splitByMultipleDelimiter(numbers);
-        }
-
-        else if(numbers.startsWith("//[")) {         // string with multiple size delimiter
-            arrOfStr = splitByAnyLengthDelimiter(numbers);
-        }
-        else if(numbers.startsWith("//")) {     // string with custom delimiter
-            arrOfStr = splitByCustomDelimiter(numbers);
-        }
-        else {
-            arrOfStr = splitByLinesAndCommas(numbers);
-        }
-
+        String[] arrOfStr = getArrayOfString(numbers);
         int[] arrOfNumbers = new int[arrOfStr.length];
         for(int i=0; i<arrOfStr.length; i++) {
             arrOfNumbers[i] = Integer.parseInt(arrOfStr[i]);
         }
 
         return arrOfNumbers;
+    }
+
+    public static String[] getArrayOfString(String numbers) {
+        if(numbers.startsWith("//[")) {
+            String[] numArr = numbers.split("\n");
+            int cnt = 0;
+            for(int i=0; i<numArr[0].length(); i++) {
+                if(numArr[0].charAt(i) == '[') cnt++;
+            }
+
+            if(cnt > 1)
+                return splitByMultipleDelimiter(numbers);
+            else
+                return splitByAnyLengthDelimiter(numbers);
+        }
+
+        else if(numbers.startsWith("//")) {
+            return splitByCustomDelimiter(numbers);
+        }
+
+        else {
+            return splitByLinesAndCommas(numbers);
+        }
     }
 
     public static String[] splitByLinesAndCommas(String numbers) {
@@ -68,12 +79,25 @@ public class IncubyteStringCalculator {
         return arr;
     }
 
-    public static String[] splitByMultipleDelimiter(String numbers) {
+    public static String[]  splitByMultipleDelimiter(String numbers) {
         String[] strArr = numbers.split("\n");
+        List<String> stringList = new ArrayList<>();
+        for(int i=1; i<strArr.length; i++) {
+            String[] temp = strArr[i].split("[!@#$%^&*_+-]");
+            for(String st: temp) {
+                if(!st.isEmpty()) stringList.add(st);
+            }
+        }
 
-        return strArr[1].split("[!@#$%^&*_+-]");
+        String[] arr = new String[stringList.size()];
+        for(int i=0; i<arr.length; i++) {
+            arr[i] = stringList.get(i);
+        }
+
+        return arr;
+
+        //return numArr[1].split("[!@#$%^&*_+-]");
     }
-
     public static int sumOfArray(int[] arr) throws Exception {
         isContainNegative(arr);
 
