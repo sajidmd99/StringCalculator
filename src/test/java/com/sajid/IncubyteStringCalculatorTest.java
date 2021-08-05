@@ -47,4 +47,9 @@ public class IncubyteStringCalculatorTest {
 
         assertEquals("negatives not allowed: -1", exception.getMessage());
     }
+
+    @Test
+    public void ignoringNumbersGreaterThan1000_success() throws Exception {
+        assertEquals(8, IncubyteStringCalculator.add("4,1002,4"));
+    }
 }
